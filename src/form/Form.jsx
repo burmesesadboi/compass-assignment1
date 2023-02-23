@@ -4,10 +4,72 @@ import { FiSend } from "react-icons/fi";
 import { frameworks, learningTypes, levels } from "../util/data";
 
 export default class Form extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      framework: "React",
+      level: "Basic",
+      learningType: ["Fundamentals"],
+      feedbackDetails: "",
+    };
+  }
+
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    return this.setState({
+      [name]: value,
+    });
+  };
+
+  handleCheck = (event) => {
+    const { value, checked } = event.target;
+    const { learningType } = this.state;
+
+    // if (checked) {
+    //   this.setState({
+    //     learningType: [...learningType, value],
+    //   });
+    // } else {
+    //   this.setState({
+    //     learningType: learningType.filter((item) => item !== value),
+    //   });
+    // }
+
+    checked
+      ? this.setState({ learningType: [...learningType, value] })
+      : this.setState({
+          learningType: learningType.filter((item) => item !== value),
+        });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Form submitted, successfully!");
+
+    console.log("Check out this.state", this.state);
+  };
   render() {
+    // destructuring state (object)
+    const {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      framework,
+      level,
+      learningType,
+      feedbackDetails,
+    } = this.state;
+    console.log("State: ", this.state);
     return (
       <div className="bgStyle">
-        <form>
+        <form onSubmit={this.handleSubmit}>
+          {/* input box တွေရေးတဲ့အခါ form tag ထဲမှာပဲရေးပေးရမယ်။ */}
           <div className="formStyle">
             <div className="sendCircle">
               <FiSend className="sendIcon" />
@@ -19,7 +81,9 @@ export default class Form extends Component {
                 <br />
                 <input
                   type="text"
+                  value={firstName}
                   name="firstName"
+                  onChange={this.handleChange} // don't forget to bind "this"
                   placeholder="Enter your first name"
                 />
               </div>
@@ -28,7 +92,9 @@ export default class Form extends Component {
                 <br />
                 <input
                   type="text"
+                  value={lastName}
                   name="lastName"
+                  onChange={this.handleChange}
                   placeholder="Enter your last name"
                 />
               </div>
@@ -39,7 +105,9 @@ export default class Form extends Component {
               <br />
               <input
                 type="email"
+                value={email}
                 name="email"
+                onChange={this.handleChange}
                 placeholder="Enter your email address"
               />
             </div>
@@ -47,8 +115,10 @@ export default class Form extends Component {
               <label className="label">Mobile Number:</label>
               <br />
               <input
+                value={phoneNumber}
                 type="number"
-                name="number"
+                name="phoneNumber"
+                onChange={this.handleChange}
                 placeholder="Enter your mobile number (eg. 0123456789)"
               />
             </div>
@@ -58,11 +128,13 @@ export default class Form extends Component {
                 Which framework is that you are learning?
               </label>
               <br />
-              <select>
+              <select
+                value={framework}
+                name="framework"
+                onChange={this.handleChange}
+              >
                 {frameworks.map((framework) => (
-                  <option key={framework.id} value={framework.value}>
-                    {framework.value}
-                  </option>
+                  <option key={framework.id}>{framework.value}</option>
                 ))}
               </select>
             </div>
@@ -71,14 +143,17 @@ export default class Form extends Component {
               <label className="label">Level</label>
               <br />
               <div className="wrapper">
-                {levels.map((level) => (
-                  <div
-                    key={level.id}
-                    value={level.name}
-                    className="wrapperInner"
-                  >
-                    <input type="radio" name="level" />
-                    <label>{level.name}</label>
+                {levels.map((el) => (
+                  <div key={el.id} className="wrapperInner">
+                    <input
+                      type="radio"
+                      name="level"
+                      value={el.name}
+                      onChange={this.handleChange}
+                      // defaultChecked={level && el.name === level}
+                      defaultChecked={el.name === level}
+                    />
+                    <label>{el.name}</label>
                   </div>
                 ))}
               </div>
@@ -88,22 +163,34 @@ export default class Form extends Component {
               <label className="label">Learning Types</label>
               <br />
               <div className="wrapper">
-                {learningTypes.map((learningType) => (
-                  <div
-                    key={learningType.id}
-                    value={learningType.name}
-                    className="wrapperInner"
-                  >
-                    <input type="checkbox" />
-                    <label>{learningType.name}</label>
+                {learningTypes.map((el) => (
+                  <div key={el.id} className="wrapperInner">
+                    <input
+                      type="checkbox"
+                      name="learningType"
+                      value={el.name}
+                      // defaultChecked={
+                      //   learningType && learningType.includes(el.name)
+                      // } // returns ture or false
+                      defaultChecked={
+                        learningType && learningType.includes(el.name)
+                      }
+                      onChange={this.handleCheck}
+                    />
+                    <label>{el.name}</label>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="details">
+            <div className="detailsWrapper">
               <label className="label">Why do you like this?</label>
-              <textarea rows="50"></textarea>
+              <textarea
+                rows="50"
+                name="feedbackDetails"
+                value={feedbackDetails}
+                onChange={this.handleChange}
+              ></textarea>
             </div>
 
             <div className="buttonWrapper">
