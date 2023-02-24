@@ -80,13 +80,16 @@
   font-weight: bold;
 }
 
+.button:focus {
+  outline-color: var(--secondary);
+}
+
 input,
 textarea,
 select {
   background: var(--white-light);
   border: none;
   border-radius: 3px;
-  outline-color: var(--primary-clr);
   width: 100%;
   padding: 2px 5px;
   outline: none;

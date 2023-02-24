@@ -3,7 +3,7 @@
 :root {
   --primary-clr: hsl(204, 92%, 60%);
   --primary-clr-4: hsl(204, 92%, 43%, 0.4);
-  --secondary: hsl(43, 100%, 62%);
+  --secondary: #db222a;
   --black: hsl(0, 0%, 0%);
   --white: hsl(100, 100%, 100%);
   --white-light: hsl(203, 29%, 95%);
