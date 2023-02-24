@@ -65,7 +65,7 @@ export default class Form extends Component {
       learningType,
       feedbackDetails,
     } = this.state;
-    console.log("State: ", this.state);
+
     return (
       <div className="bgStyle">
         <form onSubmit={this.handleSubmit}>
@@ -172,9 +172,7 @@ export default class Form extends Component {
                       // defaultChecked={
                       //   learningType && learningType.includes(el.name)
                       // } // returns ture or false
-                      defaultChecked={
-                        learningType && learningType.includes(el.name)
-                      }
+                      defaultChecked={learningType.includes(el.name)}
                       onChange={this.handleCheck}
                     />
                     <label>{el.name}</label>
