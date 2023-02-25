@@ -5,7 +5,7 @@ const levels = [
   },
   {
     id: 2,
-    name: "Immediate",
+    name: "Intermediate",
   },
   {
     id: 3,
