@@ -30,16 +30,6 @@ export default class Form extends Component {
     const { value, checked } = event.target;
     const { learningType } = this.state;
 
-    // if (checked) {
-    //   this.setState({
-    //     learningType: [...learningType, value],
-    //   });
-    // } else {
-    //   this.setState({
-    //     learningType: learningType.filter((item) => item !== value),
-    //   });
-    // }
-
     checked
       ? this.setState({ learningType: [...learningType, value] })
       : this.setState({
@@ -49,20 +39,7 @@ export default class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    /* if (
-      this.state.firstName &&
-      this.state.lastName &&
-      this.state.email &&
-      this.state.phoneNumber &&
-      this.state.learningType &&
-      this.state.feedbackDetails
-    ) {
-      alert("Form submitted, successfully!");
 
-      return console.log("Check out this.state", this.state);
-    } else {
-      return alert("Please fill out all fields");
-    } */
     // conditional rendering for form validation
     this.state.firstName &&
     this.state.lastName &&
@@ -91,7 +68,6 @@ export default class Form extends Component {
     return (
       <div className="bgStyle">
         <form onSubmit={this.handleSubmit}>
-          {/* input box တွေရေးတဲ့အခါ form tag ထဲမှာပဲရေးပေးရမယ်။ */}
           <div className="formStyle">
             <div className="sendCircle">
               <FiSend className="sendIcon" />
