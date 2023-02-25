@@ -49,10 +49,32 @@ export default class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    alert("Form submitted, successfully!");
+    /* if (
+      this.state.firstName &&
+      this.state.lastName &&
+      this.state.email &&
+      this.state.phoneNumber &&
+      this.state.learningType &&
+      this.state.feedbackDetails
+    ) {
+      alert("Form submitted, successfully!");
 
-    console.log("Check out this.state", this.state);
+      return console.log("Check out this.state", this.state);
+    } else {
+      return alert("Please fill out all fields");
+    } */
+    // conditional rendering for form validation
+    this.state.firstName &&
+    this.state.lastName &&
+    this.state.email &&
+    this.state.phoneNumber &&
+    this.state.learningType &&
+    this.state.feedbackDetails
+      ? (alert("Form submitted, successfully!"),
+        console.log("Check out this.state", this.state))
+      : alert("Please fill out all fields");
   };
+
   render() {
     // destructuring state (object)
     const {
